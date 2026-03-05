@@ -12,7 +12,7 @@ During the reconnaissance phase of SQL injection testing, determining the databa
 
 In this lab, the backend database was identified as Oracle, and the database version was successfully extracted using a UNION-based SQL Injection attack.
 
-3. Tools / Environment
+  3. Tools / Environment
 
 The following tools were used during this lab:
 

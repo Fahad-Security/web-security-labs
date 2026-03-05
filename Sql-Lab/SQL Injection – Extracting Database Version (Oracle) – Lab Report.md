@@ -24,7 +24,7 @@ PortSwigger Web Security Academy Lab
 
 SQL Injection Cheat Sheet
 
-4. Step-by-Step Process / Methodology
+  4. Step-by-Step Process / Methodology
 Step 1 – Access the vulnerable parameter
 
 The application contains a category parameter in the URL when selecting product categories.
@@ -35,14 +35,14 @@ Example request:
 
 This parameter was suspected to be vulnerable to SQL Injection.
 
-Step 2 – Intercept the request
+  Step 2 – Intercept the request
 
 The request was intercepted using OWASP ZAP Proxy to analyze and modify the HTTP request.
 
 Example intercepted request:
 
 GET /filter?category=Accessories HTTP/1.1
-Step 3 – Test SQL Injection using UNION
+  Step 3 – Test SQL Injection using UNION
 
 To test if the parameter is injectable, a UNION SELECT payload was injected.
 
@@ -60,7 +60,7 @@ Oracle databases require selecting from a table
 
 The built‑in Oracle table DUAL was used
 
-Step 4 – Send the request to the server
+  Step 4 – Send the request to the server
 
 After sending the request, the response was rendered in the browser.
 
@@ -71,7 +71,7 @@ Description: DEF
 
 This confirmed that the SQL Injection attack was successful.
 
-Step 5 – Extract the database version
+  Step 5 – Extract the database version
 
 Next, the payload was modified to retrieve the database version.
 
@@ -85,7 +85,7 @@ banner → contains version information
 
 v$version → Oracle system view containing database version details
 
-Step 6 – Send the payload
+  Step 6 – Send the payload
 
 After sending the payload, the response was rendered in the browser.
 
@@ -95,7 +95,7 @@ CORE 11.2.0.2.0 Production
 
 This reveals the Oracle database version.
 
-5. Results / Observations
+  5. Results / Observations
 
 The SQL Injection attack successfully:
 
@@ -110,8 +110,8 @@ Returned database version:
 CORE 11.2.0.2.0 Production
 
 The lab was successfully solved after retrieving the database version.
-
-6. Analysis / Explanation
+ 
+  6. Analysis / Explanation
 
 The vulnerability exists because the application directly includes user input inside an SQL query without proper validation or sanitization.
 
@@ -140,34 +140,34 @@ The table v$version is specific to Oracle databases
 
 If another database were used (MySQL, PostgreSQL, MSSQL), this syntax would likely fail.
 
-7. Mitigation / Recommendations
+  7. Mitigation / Recommendations
 
 To prevent SQL Injection vulnerabilities, developers should implement the following security measures:
 
-1. Use Prepared Statements
+  1. Use Prepared Statements
 
 Parameterized queries prevent attackers from injecting SQL code.
 
 Example (secure approach):
 
 SELECT name, description FROM products WHERE category = ?
-2. Input Validation
+  2. Input Validation
 
 All user input should be validated and sanitized before processing.
 
-3. Use ORM Frameworks
+  3. Use ORM Frameworks
 
 ORM frameworks often handle query parameterization automatically.
 
-4. Apply Least Privilege
+  4. Apply Least Privilege
 
 Database accounts used by the application should have minimal privileges to reduce impact if an attack occurs.
 
-5. Implement Web Application Firewall (WAF)
+  5. Implement Web Application Firewall (WAF)
 
 A WAF can detect and block common SQL Injection patterns.
 
-8. Appendix / References
+  8. Appendix / References
 
 Lab Source
 
